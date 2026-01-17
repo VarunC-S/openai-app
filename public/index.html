@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI </title>
+
+    <style>
+        #output {
+  margin-top: 30px;
+  padding: 20px;
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 8px;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  min-height: 120px;
+}
+
+.output-title {
+  margin-top: 30px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #111827;
+}
+
+    </style>
+</head>
+<body>
+    
+</body><h2>AI Code Explainer</h2>
+
+<textarea id="code" placeholder="Paste your code..."></textarea>
+<br />
+<button onclick="explainCode()">Explain Code</button>
+
+<pre id="output"></pre>
+
+<script>
+    async function explainCode() {
+    // Getting the code entered by the user
+    const code = document.getElementById("code").value;
+
+    const res = await fetch("http://localhost:3000/explain", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ code }) // send as JSON
+    });
+
+    // Convert response to JSON
+    const data = await res.json();
+
+    // Displaying the text returned from AI to frontend
+    document.getElementById("output").innerText = data.explanation;
+  }
+</script>
+</body>
+</html>
