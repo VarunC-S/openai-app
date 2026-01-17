@@ -6,7 +6,7 @@ import "dotenv/config";
 
 // Creating Express App
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware that converts frontend JSON data to JS object
 app.use(express.json());
